@@ -1,19 +1,20 @@
 "use client";
-import { useEffect, useState, useContext, createContext } from "react";
+import { useEffect, useState } from "react";
 import { SinglePost } from "../Components/SinglePost";
+import { useSearch } from "../layout";
 import Link from "next/link";
 export default function Blog() {
   const [posts, setPosts] = useState([]);
   const [load, setLoadMore] = useState(12);
+  const {search} = useSearch();
   const addLoad = () => {
     setLoadMore(load + 3);
   };
   useEffect(() => {
-    fetch(`https://dev.to/api/articles?per_page=${load}`)
+    fetch(`https://dev.to/api/articles?per_page=${load}?${search}`)
       .then((response) => response.json())
       .then((data) => setPosts(data));
-  }, [load]);
-  console.log(posts);
+  }, [load,search]);
   return (
     <div className="flex flex-col bg-white max-w-[1216px] m-auto">
       <h2 className="text-2xl font-bold text-[#181A2A] my-12 ">

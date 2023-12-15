@@ -44,6 +44,7 @@ export function Header() {
           src="/icon_burger.png"
         />
         <BurgerMenu />
+        <div></div>
       </div>
     </header>
   );

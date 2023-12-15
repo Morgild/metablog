@@ -11,7 +11,7 @@ export function BlogPosts() {
 
   useEffect(() => {
     fetch(
-      `https://dev.to/api/articles?per_page=${loadMore}&tag=${category}?${search}`
+      `https://dev.to/api/articles/latest?per_page=${loadMore}&tag=${category}?${search}`
     )
       .then((response) => response.json())
       .then((data) => setPosts(data));
@@ -30,12 +30,12 @@ export function BlogPosts() {
         <h2 className="text-2xl font-bold text-[#181A2A] ml-4 md:ml-0 ">All Blog Post</h2>
         <div className="flex justify-between ml-4 md:ml-0">
           <ul className="flex justify-start items-center gap-5 h-[25px] text-xs font-bold text-[#495057] cursor-pointer">
-            <li onClick={getCategory} style={{color:active?'#D4A373':'#495057'}}>All</li>
-            <li onClick={getCategory} style={{color:active?'#D4A373':'#495057'}}>Design</li>
-            <li onClick={getCategory} style={{color:active?'#D4A373':'#495057'}}>Travel</li>
-            <li onClick={getCategory} style={{color:active?'#D4A373':'#495057'}}>Fashion</li>
-            <li onClick={getCategory} style={{color:active?'#D4A373':'#495057'}}>Technology</li>
-            <li onClick={getCategory} style={{color:active?'#D4A373':'#495057'}}>Branding</li>
+            <li onClick={getCategory} style={{color:category==' '?'#D4A373':'#495057'}}>All</li>
+            <li onClick={getCategory} style={{color:category=='design'?'#D4A373':'#495057'}}>Design</li>
+            <li onClick={getCategory} style={{color:category=='travel'?'#D4A373':'#495057'}}>Travel</li>
+            <li onClick={getCategory} style={{color:category=='fashion'?'#D4A373':'#495057'}}>Fashion</li>
+            <li onClick={getCategory} style={{color:category=='technology'?'#D4A373':'#495057'}}>Technology</li>
+            <li onClick={getCategory} style={{color:category=='branding'?'#D4A373':'#495057'}}>Branding</li>
           </ul>
           <p className="flex justify-start items-center gap-5 h-[25px] text-xs font-bold text-[#495057] cursor-pointer mr-4 md:mr-0">
             <Link href={"/Blog"}>View All</Link>
@@ -45,7 +45,7 @@ export function BlogPosts() {
 
       <div className="grid md:grid-cols-3 grid-cols-1 gap-5 cursor-pointer">
         {posts.map((post) => (
-          <Link href={`/Blog/${post.id}`}>
+          <Link key={post.id} href={`/Blog/${post.id}`}>
           <Post key={post.id} {...post} category={category} /></Link>
         ))}
       </div>

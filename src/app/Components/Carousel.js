@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearch } from "../layout";
+import Link from "next/link";
 export function Carousel() {
   const [carousel, setCarousel] = useState([]);
   const [page, setPage] = useState(1);
@@ -20,7 +21,7 @@ export function Carousel() {
     <div className="w-full bg-white mt-[100px] hidden md:flex md:flex-col">
       {/* {carousel.map((post) => ( */}
       {carousel.length > 0 && (
-        <div key={carousel.id} className="relative rounded-xl overflow-hidden">
+        <Link href={`/Blog/${carousel[page].id}`}><div key={carousel.id} className="relative rounded-xl overflow-hidden">
           <img
             className="w-full object-cover"
             src={
@@ -30,7 +31,7 @@ export function Carousel() {
             }
           />
           <div onClick={console.log(search.search)} className="bg-white rounded-[12px]  gap-6">
-            <div className="flex w-2/5 flex-col gap-4 bg-white p-[40px] gap-4 rounded-[12px] absolute left-[11px] bottom-[13px] ">
+            <div className="flex w-1/2 flex-col gap-4 bg-white p-[40px] gap-4 rounded-[12px] absolute left-[11px] bottom-[13px] ">
               <span className="text-white text-sm font-medium bg-[#4B6BFB] rounded-[6px] w-fit px-[10px] py-1">
                 {carousel[page].tag_list[0]}
               </span>
@@ -42,7 +43,7 @@ export function Carousel() {
               </p>
             </div>
           </div>
-        </div>
+        </div></Link>
       )}
       {/* ))} */}
       <div className="mt-[11px] flex gap-3 justify-end">
